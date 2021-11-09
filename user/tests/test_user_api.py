@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 CREATE_URL = reverse('user:create')
-
+TOKEN_URL = reverse('user:token')
 
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
@@ -19,9 +19,9 @@ class PublicUserApiTests(TestCase):
     
     def test_create_user_sucess(self):
         """Test creating user through an API is successful"""
-        payload = {'email':'test@gmail.com', 'user_name':'testusername123','password':'testpass123'}
+        payload = {'email':'test@gmail.com', 'password':'testpass123'}
 
-        res = self.client.post(CREATE_URL, payload)
+        res = self.client.post(CREATE_URL, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         
@@ -33,7 +33,7 @@ class PublicUserApiTests(TestCase):
     def test_uesr_already_exists(self):
         """Test creating already exisitng user fails"""
 
-        paylaod = {'email':'test@gmail.com', 'user_name':'testuser123', 'password':'testpass123'}
+        paylaod = {'email':'test@gmail.com', 'password':'testpass123'}
         create_user(**paylaod)
 
         res = self.client.post(CREATE_URL, paylaod)
@@ -43,16 +43,10 @@ class PublicUserApiTests(TestCase):
     def test_password_is_too_short(self):
         """Test creating user with too short password fails"""
 
-        payload = {'email': 'test@gmail.com', 'user_name':'testuser123', 'password':'pw'}
+        payload = {'email': 'test@gmail.com', 'password':'pw'}
         
         res = self.client.post(CREATE_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
-    
-    
-
-        
-
-    
     
     
