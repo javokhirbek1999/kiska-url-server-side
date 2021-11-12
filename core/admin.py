@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from . import models
+from .models import user, url
 
 
 class UserAdmin(UserAdmin):
@@ -20,4 +20,6 @@ class UserAdmin(UserAdmin):
         }),
     )
 
-admin.site.register(models.User, UserAdmin)
+admin.site.register(user.User, UserAdmin)
+admin.site.register(url.OriginalURL)
+admin.site.register(url.ShortURL)
