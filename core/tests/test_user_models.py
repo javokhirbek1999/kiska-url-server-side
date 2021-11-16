@@ -7,14 +7,16 @@ class UserModelTests(TestCase):
     def test_create_user_with_email_success(self):
         """Test creating a user with email successfully"""
         
-        payload = {'email': 'test@gmail.com', 'password':'testpass123'}
+        payload = {'email': 'test@gmail.com', 'user_name': 'testuser123', 'password':'testpass123'}
 
         user = get_user_model().objects.create_user(
             email=payload['email'],
+            user_name=payload['user_name'],
             password=payload['password']
         )
 
         self.assertEqual(user.email, payload['email'])
+        self.assertEqual(user.user_name, payload['user_name'])
         self.assertTrue(user.check_password(payload['password']))
     
     def test_create_user_email_is_normalized(self):
@@ -22,6 +24,7 @@ class UserModelTests(TestCase):
 
         user = get_user_model().objects.create_user(
             email='test@GmAIl.com',
+            user_name='testuser123',
             password='testpass123'
         )
 
@@ -32,6 +35,7 @@ class UserModelTests(TestCase):
 
         user = get_user_model().objects.create_superuser(
             email='test@gmail.com',
+            user_name='testuser123',
             password='testpass123'
         )
 

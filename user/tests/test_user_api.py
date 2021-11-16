@@ -19,7 +19,7 @@ class PublicUserApiTests(TestCase):
     
     def test_create_user_sucess(self):
         """Test creating user through an API is successful"""
-        payload = {'email':'test@gmail.com', 'password':'testpass123'}
+        payload = {'email':'test@gmail.com', 'user_name':'testuser123', 'password':'testpass123'}
 
         res = self.client.post(CREATE_URL, payload, format='json')
 
@@ -33,7 +33,7 @@ class PublicUserApiTests(TestCase):
     def test_uesr_already_exists(self):
         """Test creating already exisitng user fails"""
 
-        paylaod = {'email':'test@gmail.com', 'password':'testpass123'}
+        paylaod = {'email':'test@gmail.com', 'user_name': 'testuser123','password':'testpass123'}
         create_user(**paylaod)
 
         res = self.client.post(CREATE_URL, paylaod)
@@ -43,7 +43,7 @@ class PublicUserApiTests(TestCase):
     def test_password_is_too_short(self):
         """Test creating user with too short password fails"""
 
-        payload = {'email': 'test@gmail.com', 'password':'pw'}
+        payload = {'email': 'test@gmail.com', 'user_name': 'testuser123','password':'pw'}
         
         res = self.client.post(CREATE_URL, payload)
 

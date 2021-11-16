@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x+(8atei0g6$!pef=#&br1eyeuup(9m(*flv8l_k(y%t1a@!4@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1:8000','kisk-url.io', '*']
 
 
 # Application definition
@@ -96,6 +96,15 @@ REST_FRAMEWORK = {
     ]
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -140,3 +149,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.User'
+
+CACHE_TTL = 60*15
+
+DEFAULT_DOMAIN = 'http://{}/'.format(ALLOWED_HOSTS[0])

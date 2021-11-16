@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from core.views.url_views import RedirectApiView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/', include('user.urls')),
+    path('api/user/', include('user.urls', namespace='user')),
+    path('api/urls/', include('core.urls', namespace='urls')),
+    path('<str:pk>/', RedirectApiView.as_view(), name='single-short'),
 ]
