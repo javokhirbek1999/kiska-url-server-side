@@ -9,6 +9,7 @@ class OriginalURL(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     url = models.URLField(max_length=2048)
     date_created = models.DateTimeField(auto_now_add=True)
+    shortened = models.IntegerField(default=1, editable=False)
 
     @property
     def get_user_username(self):
@@ -55,57 +56,4 @@ class ShortURL(models.Model):
             'id': self.id,
             'original_url': self.originalURL.url,
             'short_url': self.shortURL
-        }
-
-
-class AllOriginalURL(models.Model):
-
-    """All Original URL model"""
-
-    url = models.URLField(max_length=2048)
-    shortened = models.IntegerField(default=0, editable=False)
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['-date_created']
-    
-    def __str__(self) -> str:
-        return f"URL: {self.url} || Shortended: {self.shortened} || Created: {self.date_created}"
-
-    def to_json(self):
-        return {
-            'id': self.id,
-            'url': self.url,
-            'shortened': self.shortened,
-            'date_created': self.date_created
-        }
-
-class AllShortURL(models.Model):
-
-    """All Short URL model"""
-
-    url = models.ForeignKey(ShortURL, on_delete=models.CASCADE)
-    visited = models.IntegerField(default=0, editable=False)
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['-date_created']
-    
-    @property
-    def get_user(self):
-        return self.url.user.user_name
-    
-    @property
-    def get_url(self):
-        return self.url.short_url
-
-    def __str__(self) -> str:
-        return f"URL: {self.url} || Visited: {self.visited} || Created: {self.date_created}"
-    
-    def to_json(self):
-        return {
-            'id': self.id,
-            'url': self.url,
-            'visited': self.visited,
-            'date_created': self.date_created
         }

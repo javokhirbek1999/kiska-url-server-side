@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 
-from ..models.url import OriginalURL, ShortURL, AllShortURL
+from ..models.url import OriginalURL, ShortURL
 from ..utils.urls import utils
 
 

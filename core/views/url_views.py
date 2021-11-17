@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 
 from ..serializers import url_serializer
-from ..models.url import AllOriginalURL, OriginalURL, ShortURL, AllShortURL
+from ..models.url import OriginalURL, ShortURL
 
 class OriginalUrlApiView(generics.ListCreateAPIView):
     """API view for creating and listing original url"""
@@ -31,25 +31,6 @@ class RedirectApiView(APIView):
 
     def get(self, request, *args, **kwargs):
         short_url_object = ShortURL.objects.get(urlHash=kwargs.get('pk'))
-        all_short_url_instance = AllShortURL.objects.get(url=short_url_object)
-        all_short_url_instance.visited += 1
         short_url_object.visited += 1
-        all_short_url_instance.save()
         short_url_object.save()
         return redirect(short_url_object.originalURL.url)
-
-
-class AllOriginalUrlApiView(generics.ListAPIView):
-    """API view for listing all Original URLs created so far"""
-
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = url_serializer.AllOriginalUrlSerializer
-    queryset = AllOriginalURL.objects.all()
-
-
-class AllShortUrlApiView(generics.ListAPIView):
-    """API view for listing all Shortened URLs created so far"""
-    
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = url_serializer.AllShortUrlSerializer
-    queryset = AllShortURL.objects.all()
