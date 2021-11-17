@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.shortcuts import get_current_site
 
 class OriginalURL(models.Model):
+
+    """Original URL Model"""
+
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     url = models.URLField(max_length=2048)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -23,17 +26,21 @@ class OriginalURL(models.Model):
             'user': self.user.user_name,
             'date_created': self.date_created
         }
-    
+
+
 
 class ShortURL(models.Model):
-    original_url = models.ForeignKey(OriginalURL, on_delete=models.DO_NOTHING, null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, default=0)
-    short_url = models.URLField(max_length=2048)
-    url_hash = models.CharField(max_length=200, default="")
+
+    """Short URL model"""
+    originalURL = models.ForeignKey(OriginalURL, on_delete=models.DO_NOTHING, null=False)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=0)
+    shortURL = models.URLField(max_length=2048)
+    urlHash = models.CharField(max_length=200, default="")
+    visited = models.IntegerField(default=0)
 
     @property
     def get_original_url(self):
-        return self.original_url.url
+        return self.originalURL.url
     
     @property
     def get_username(self):
@@ -41,17 +48,20 @@ class ShortURL(models.Model):
     
     @property
     def date_created(self):
-        return self.original_url.date_created
+        return self.originalURL.date_created
     
     def to_json(self):
         return {
             'id': self.id,
-            'original_url': self.original_url.url,
-            'short_url': self.short_url
+            'original_url': self.originalURL.url,
+            'short_url': self.shortURL
         }
 
 
 class AllOriginalURL(models.Model):
+
+    """All Original URL model"""
+
     url = models.URLField(max_length=2048)
     shortened = models.IntegerField(default=0, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -71,13 +81,24 @@ class AllOriginalURL(models.Model):
         }
 
 class AllShortURL(models.Model):
-    url = models.URLField(max_length=2048)
+
+    """All Short URL model"""
+
+    url = models.ForeignKey(ShortURL, on_delete=models.CASCADE)
     visited = models.IntegerField(default=0, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-date_created']
     
+    @property
+    def get_user(self):
+        return self.url.user.user_name
+    
+    @property
+    def get_url(self):
+        return self.url.short_url
+
     def __str__(self) -> str:
         return f"URL: {self.url} || Visited: {self.visited} || Created: {self.date_created}"
     

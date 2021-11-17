@@ -7,6 +7,13 @@ from ..models.url import OriginalURL, ShortURL, AllOriginalURL, AllShortURL
 
 @receiver(post_save, sender=OriginalURL)
 def create_original_url(sender, instance, created, **kwargs):
+    
+    """ 
+        Trying to get the posted url if it was already created before,
+        if it already exists then increment the shortened count,
+        else post it into the database
+    """
+    
     if created:
         original_url = None
         try:

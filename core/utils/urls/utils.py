@@ -3,6 +3,8 @@ from hashlib import md5
 
 def hash_the_url(user, url):
 
+    """Hashing function for hasing the URL"""
+
     user_id = user.id
 
     str_user_id = str(user_id)
