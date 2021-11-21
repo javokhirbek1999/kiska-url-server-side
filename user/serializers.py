@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class AuthTokenSerializer(serializers.Serializer):
+    """Serializer for creating authentication token"""
 
     email = serializers.EmailField()
     password = serializers.CharField(
@@ -30,7 +31,7 @@ class AuthTokenSerializer(serializers.Serializer):
 
         user = authenticate(
             request=self.context.get('request'),
-            email=email,
+            username=email,
             password=password
         )
 
@@ -38,5 +39,10 @@ class AuthTokenSerializer(serializers.Serializer):
             msg = _('Validation Error, invalid credentails')
             raise serializers.ValidationError(msg, code='authentication')
         
+        if not user.is_active:
+            msg = _('User is blocked, please contact admin')
+            raise serializers.ValidationError(msg, code='authentication')
+
         attrs['user'] = user
+
         return attrs

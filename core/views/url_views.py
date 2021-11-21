@@ -11,7 +11,7 @@ from ..models.url import OriginalURL, ShortURL
 class OriginalUrlApiView(generics.ListCreateAPIView):
     """API view for creating and listing original url"""
     
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = url_serializer.OriginalUrlSerializer
     queryset = OriginalURL.objects.all()
 
@@ -19,7 +19,7 @@ class OriginalUrlApiView(generics.ListCreateAPIView):
 class ShortUrlApiView(generics.ListAPIView):
     """API view for creating and listing shortened url"""
     
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = url_serializer.ShortenedUrlSerializer
     queryset = ShortURL.objects.all()
 

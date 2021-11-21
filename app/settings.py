@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-x+(8atei0g6$!pef=#&br1eyeuup(9m(*flv8l_k(y%t1a@!4@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:8000','kisk-url.io', '*']
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-
     'core',
     'user',
 ]
@@ -88,15 +88,41 @@ DATABASES = {
     }
 }
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+]
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'http://localhost:3000',
+    'localhost',
+    'localhost:3000'
+)
+
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
-     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTHENTICATION_BACKENDS = (
+    # Django
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 CACHES = {
     'default': {
@@ -108,10 +134,6 @@ CACHES = {
     }
 }
 
-
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -137,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
@@ -160,3 +182,4 @@ AUTH_USER_MODEL = 'core.User'
 CACHE_TTL = 60*15
 
 DEFAULT_DOMAIN = 'http://{}/'.format(ALLOWED_HOSTS[0])
+CSRF_COOKIE_NAME = "csrftoken"
