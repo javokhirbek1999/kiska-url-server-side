@@ -2,6 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect
 
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
@@ -15,13 +16,15 @@ class OriginalUrlApiView(generics.ListCreateAPIView):
     serializer_class = url_serializer.OriginalUrlSerializer
     queryset = OriginalURL.objects.all()
 
-
 class ShortUrlApiView(generics.ListAPIView):
     """API view for creating and listing shortened url"""
     
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = url_serializer.ShortenedUrlSerializer
     queryset = ShortURL.objects.all()
+
+
+    
 
 
 

@@ -10,6 +10,8 @@ class OriginalURL(models.Model):
     url = models.URLField(max_length=2048)
     date_created = models.DateTimeField(auto_now_add=True)
     shortened = models.IntegerField(default=1, editable=False)
+    urlHash = models.CharField(max_length=200, default="")
+    shortURL = models.URLField(max_length=2048, default="")
 
     @property
     def get_user_username(self):
