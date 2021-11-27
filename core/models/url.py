@@ -12,6 +12,7 @@ class OriginalURL(models.Model):
     shortened = models.IntegerField(default=1, editable=False)
     urlHash = models.CharField(max_length=200, default="")
     shortURL = models.URLField(max_length=2048, default="")
+    visited = models.IntegerField(default=0)
 
     @property
     def get_user_username(self):
@@ -28,34 +29,4 @@ class OriginalURL(models.Model):
             'id': self.id,
             'user': self.user.user_name,
             'date_created': self.date_created
-        }
-
-
-
-class ShortURL(models.Model):
-
-    """Short URL model"""
-    originalURL = models.ForeignKey(OriginalURL, on_delete=models.DO_NOTHING, null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=0)
-    shortURL = models.URLField(max_length=2048)
-    urlHash = models.CharField(max_length=200, default="")
-    visited = models.IntegerField(default=0)
-
-    @property
-    def get_original_url(self):
-        return self.originalURL.url
-    
-    @property
-    def get_username(self):
-        return self.user.user_name
-    
-    @property
-    def date_created(self):
-        return self.originalURL.date_created
-    
-    def to_json(self):
-        return {
-            'id': self.id,
-            'original_url': self.originalURL.url,
-            'short_url': self.shortURL
         }

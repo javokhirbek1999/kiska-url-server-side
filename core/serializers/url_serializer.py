@@ -13,12 +13,13 @@ class OriginalUrlSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = url.OriginalURL
-        fields = ('id','user', 'get_user_username', 'url', 'shortened', 'date_created', 'shortURL', 'urlHash')
+        fields = ('id','user', 'get_user_username', 'url', 'shortened', 'visited', 'date_created', 'shortURL', 'urlHash')
 
         extra_kwargs = {
             "user": {"read_only": True},
             "urlHash": {"read_only": True},
             "shortURL": {"read_only": True},
+            "visited": {"read_only": True},
         }
 
     def validate(self, attrs):
@@ -40,14 +41,3 @@ class OriginalUrlSerializer(serializers.ModelSerializer):
             instance.save() 
         
         return instance
-
-
-class ShortenedUrlSerializer(serializers.ModelSerializer):
-
-    """Serializer for Short URL API View"""
-
-    class Meta:
-        model = url.ShortURL
-        fields = ('id', 'get_username', 'get_original_url', 'shortURL', 'visited', 'date_created')
-
-    

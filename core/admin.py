@@ -23,4 +23,3 @@ class UserAdmin(UserAdmin):
 
 admin.site.register(user.User, UserAdmin)
 admin.site.register(url.OriginalURL)
-admin.site.register(url.ShortURL)
