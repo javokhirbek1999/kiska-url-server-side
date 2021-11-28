@@ -8,7 +8,10 @@ app_name = 'user'
 
 urlpatterns = [
     path('create/', views.UserAPIView.as_view(), name='create'),
+    path('change-password/', views.UserPasswordChange.as_view(), name='change-password'),
+    path('password-reset-request/', views.RequestResetPasswordAPIView.as_view(), name='password-reset-request'),
+    path('password-reset-confirmation/', views.ConfirmResetPasswordAPIView.as_view(), name='password-reset-confirm'),
+    path('password-reset/', views.ResetPasswordAPIView.as_view(), name='password-reset'),
     path('all/', views.AllUsers.as_view(), name='all'),
-    path('all/<str:pk>/', views.SingleUser.as_view(), name='single'),
     path('token/', views.AuthTokenAPIView.as_view(), name='token')
 ]

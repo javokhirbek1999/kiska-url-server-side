@@ -183,3 +183,14 @@ CACHE_TTL = 60*15
 
 DEFAULT_DOMAIN = 'http://{}/'.format(ALLOWED_HOSTS[0])
 CSRF_COOKIE_NAME = "csrftoken"
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+DEFAULT_FROM_EMAIL='believergamer99@gmail.com'
+EMAIL_HOST_USER='believergamer99@gmail.com'
+EMAIL_HOST_PASSWORD='Javokhirbek_19990520'
