@@ -49,3 +49,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     
     REQUIRED_FIELDS = ['user_name']
+
+    MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    def get_date_joined(self):
+        return {
+            'day': self.date_joined.day,
+            'month': self.MONTHS[self.date_joined.month-1],
+            'year': self.date_joined.year
+        }
+    
+    def get_date_updated(self): 
+        return {
+            'second': self.date_updated.second,
+            'minute': self.date_updated.minute,
+            'hour': self.date_updated.hour,
+            'day': self.date_updated.day,
+            'month': self.MONTHS[self.date_updated.month-1],
+            'year': self.date_updated.year
+        }

@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import authenticate
 
 from rest_framework import permissions, generics, status
 from rest_framework.authtoken.models import Token
@@ -81,7 +82,7 @@ class RequestResetPasswordAPIView(generics.CreateAPIView):
 class ConfirmResetPasswordAPIView(generics.CreateAPIView):
     """Password reset confirmation API View"""
 
-    permission_classes = (IsOwner,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = serializers.ConfirmResetPasswordSerializer
 
 
@@ -137,8 +138,8 @@ class SingleUser(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.UserSerializer
     
     def get_object(self, **kwargs):
+        print(self.kwargs.get('pk'))
         return get_user_model().objects.get(user_name=self.kwargs.get('pk'))
-
 
 class AuthTokenAPIView(ObtainAuthToken):
     """API view for obtaining authentication token"""

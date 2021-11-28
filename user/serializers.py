@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = get_user_model()
-        fields = ('id','email','user_name','password','date_joined','is_active')
+        fields = ('id','email','user_name','password','is_active','get_date_joined','get_date_updated')
         extra_kwargs = {
             'password': {'style':{'input_type':'password'}, 'write_only':True, 'min_length':5}
         }

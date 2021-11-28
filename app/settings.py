@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-x+(8atei0g6$!pef=#&br1eyeuup(9m(*flv8l_k(y%t1a@!4@
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1:8000','*']
+# ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.43.21']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.43.21','192.168.1.107',]
 
 
 # Application definition
@@ -88,20 +89,25 @@ DATABASES = {
     }
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = False
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000",
+    "http://192.168.43.21:3000",
+    'http://192.168.1.107:3000',
+    'http://192.168.43.21:3000',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:8000',
-    'http://localhost:3000',
-    'localhost',
-    'localhost:3000'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:8000',
+#     'http://localhost:3000',
+#     'localhost',
+#     'localhost:3000',
+#     'http://192.168.43.21:3000',
+#     '192.168.43.21:3000'
+# )
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
