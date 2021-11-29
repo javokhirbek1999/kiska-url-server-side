@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model, authenticate
+from django.db.models import fields
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
@@ -18,6 +19,20 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
+
+
+class CreateSuperuserSerializer(serializers.ModelSerializer):
+    """Serializer for creating Admin User"""
+    
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'email', 'user_name', 'password', 'get_date_joined', 'get_date_updated')
+        extra_kwargs = {
+            'password': {'style':{'input_type':'password'}, 'write_only':True, 'min_length':5}
+        }
+    
+    def create(self, validated_data):
+        return get_user_model().objects.create_superuser(**validated_data)
 
 
 class ChangePasswordSerializer(serializers.Serializer):

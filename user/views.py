@@ -21,6 +21,12 @@ class UserAPIView(generics.CreateAPIView):
     serializer_class = serializers.UserSerializer
 
 
+class CreateSuperuserAPIView(generics.CreateAPIView):
+    """API View for Creating Superuser (Admin User)"""
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = serializers.CreateSuperuserSerializer
+
+
 class UserPasswordChange(generics.UpdateAPIView):
     """API view for changing user password"""
     serializer_class = serializers.ChangePasswordSerializer
