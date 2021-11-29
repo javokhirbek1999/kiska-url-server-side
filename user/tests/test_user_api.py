@@ -17,19 +17,6 @@ class PublicUserApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
     
-    def test_create_user_sucess(self):
-        """Test creating user through an API is successful"""
-        payload = {'email':'test@gmail.com', 'user_name':'testuser123', 'password':'testpass123'}
-
-        res = self.client.post(CREATE_URL, payload, format='json')
-
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        
-        user = get_user_model().objects.get(**res.data)
-
-        self.assertTrue(user.check_password(payload['password']))
-        self.assertNotIn('password', res.data)
-    
     def test_uesr_already_exists(self):
         """Test creating already exisitng user fails"""
 
