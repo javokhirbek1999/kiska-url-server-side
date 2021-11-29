@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import environ
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env();
+environ.Env.read_env();
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -187,7 +190,7 @@ AUTH_USER_MODEL = 'core.User'
 
 CACHE_TTL = 60*15
 
-DEFAULT_DOMAIN = 'http://{}/'.format(ALLOWED_HOSTS[0])
+DEFAULT_DOMAIN = ALLOWED_HOSTS[0]
 CSRF_COOKIE_NAME = "csrftoken"
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -197,6 +200,6 @@ CSRF_COOKIE_NAME = "csrftoken"
 EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
-DEFAULT_FROM_EMAIL='believergamer99@gmail.com'
-EMAIL_HOST_USER='believergamer99@gmail.com'
-EMAIL_HOST_PASSWORD='Javokhirbek_19990520'
+DEFAULT_FROM_EMAIL=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')

@@ -126,7 +126,7 @@ class ResetPasswordAPIView(generics.UpdateAPIView):
         
         return Response({
             'status': 'failed',
-            'message': 'Password did not match',
+            'message': 'Passwords did not match',
             'code': status.HTTP_400_BAD_REQUEST,
         }, status=status.HTTP_400_BAD_REQUEST);
 
