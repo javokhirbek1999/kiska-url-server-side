@@ -195,7 +195,7 @@ AUTH_USER_MODEL = 'core.User'
 
 CACHE_TTL = 60*15
 
-DEFAULT_DOMAIN = ALLOWED_HOSTS[0]
+DEFAULT_DOMAIN = 'https://{}/'.format(ALLOWED_HOSTS[0])
 CSRF_COOKIE_NAME = "csrftoken"
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
