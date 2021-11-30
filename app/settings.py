@@ -97,8 +97,6 @@ DATABASES = {
     }
 }
 
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://kiska-url.herokuapp.com",
@@ -110,14 +108,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://192.168.43.21:3000',
 ]
 
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:8000',
-#     'http://localhost:3000',
-#     'localhost',
-#     'localhost:3000',
-#     'http://192.168.43.21:3000',
-#     '192.168.43.21:3000'
-# )
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -201,9 +191,6 @@ CACHE_TTL = 60*15
 DEFAULT_DOMAIN = 'https://{}/'.format(ALLOWED_HOSTS[0])
 CSRF_COOKIE_NAME = "csrftoken"
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'
