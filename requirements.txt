@@ -25,6 +25,7 @@ packaging==21.3
 psycopg==3.0.5
 psycopg2==2.9.2
 pyparsing==3.0.6
+python-decouple==3.5
 pytz==2021.3
 redis==3.5.3
 requests==2.26.0
