@@ -46,7 +46,7 @@ class UserPasswordChange(generics.UpdateAPIView):
     
     def update(self, request, *args, **kwargs):
         self.user = self.get_object();
-        
+
         # If user does not exist, returns 404 NOT FOUND ERROR
         if self.user is None:
             return Response({
@@ -77,7 +77,7 @@ class UserPasswordChange(generics.UpdateAPIView):
 
 class RequestResetPasswordAPIView(generics.CreateAPIView):
     """Request password reset API View"""
-    permission_classes = (IsOwner,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = serializers.RequestResetPasswordSerializer
 
     def post(self, request, *args, **kwargs):
