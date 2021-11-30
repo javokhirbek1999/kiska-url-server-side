@@ -129,11 +129,26 @@ class ResetPasswordAPIView(generics.UpdateAPIView):
     permission_classes = (IsOwner,)
     serializer_class = serializers.ResetPasswordSerializer
 
-    def get_object(self):
-        return self.request.user
+    def get_object(self, **kwargs): 
+        user = None
+        try:
+            user = get_user_model().objects.get(user_name=self.kwargs.get('username'))
+        except get_user_model().DoesNotExist:
+            pass
+        return user
     
     def update(self, request, *args, **kwargs):
         self.user = self.get_object()
+
+        # If user does not exist, returns 404 NOT FOUND ERROR
+        if self.user is None:
+            return Response({
+                'status': 'failed',
+                'code': status.HTTP_404_NOT_FOUND,
+                'message': 'User does not exist'
+            },status=status.HTTP_404_NOT_FOUND)
+
+
         serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
