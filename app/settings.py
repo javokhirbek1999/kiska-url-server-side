@@ -29,7 +29,7 @@ DEBUG = False
 
 
 # ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.43.21']
-ALLOWED_HOSTS = ['kiska.herokuapp.com','.herokuapp.com','127.0.0.1:8000','127.0.0.1','localhost','192.168.43.21','192.168.1.107',]
+ALLOWED_HOSTS = ['kiska.herokuapp.com', 'kiska-url.herokuapp.com','.herokuapp.com','127.0.0.1:8000','127.0.0.1','localhost','192.168.43.21','192.168.1.107',]
 
 
 # Application definition
@@ -101,6 +101,7 @@ DATABASES = {
 # CORS_ALLOW_CREDENTIALS = False
 
 CORS_ALLOWED_ORIGINS = [
+    "http://kiska-url.herokuapp.com/",
     "http://localhost:3000",
     "http://127.0.0.1:8000",
     "http://192.168.43.21:3000",
