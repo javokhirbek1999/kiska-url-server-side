@@ -17,7 +17,7 @@ from .utils import Utils
 
 class UserAPIView(generics.CreateAPIView):
     """API view for User Model"""
-    permission_classes = (AllowAny,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = serializers.UserSerializer
 
 
