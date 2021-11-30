@@ -66,10 +66,9 @@ class ConfirmResetPasswordSerializer(serializers.Serializer):
     def validate(self, attrs):
         token = attrs.get('token')
 
-        user = self.context.get('request').user
         # import pdb
         # pdb.set_trace()
-        if not Token.objects.get(user=user).key == token:
+        if not Token.objects.get(key=token):
             raise serializers.ValidationError(_('Token is invalid, please request new one'))
 
         return attrs
