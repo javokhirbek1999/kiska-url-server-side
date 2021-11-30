@@ -1,6 +1,11 @@
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 
+class AllowAny(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return True
+
+
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         

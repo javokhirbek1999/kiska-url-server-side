@@ -11,13 +11,13 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
 from . import serializers
-from .permissions import IsOwnerOrReadOnly, IsOwner
+from .permissions import IsOwnerOrReadOnly, IsOwner, AllowAny
 from .utils import Utils 
 
 
 class UserAPIView(generics.CreateAPIView):
     """API view for User Model"""
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (AllowAny,)
     serializer_class = serializers.UserSerializer
 
 
