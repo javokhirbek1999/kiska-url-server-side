@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import redirect
+from django.http import request
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate
@@ -33,12 +34,27 @@ class UserPasswordChange(generics.UpdateAPIView):
     model = get_user_model()
     permission_classes = (IsOwner,)
 
-    def get_object(self): 
-        obj = self.request.user
-        return obj
+    # If user does not exist, returns None
+    def get_object(self, **kwargs): 
+        user = None
+        try:
+            user = get_user_model().objects.get(user_name=self.kwargs.get('username'))
+        except get_user_model().DoesNotExist:
+            pass
+        return user
+
     
     def update(self, request, *args, **kwargs):
-        self.user = self.get_object()
+        self.user = self.get_object();
+        
+        # If user does not exist, returns 404 NOT FOUND ERROR
+        if self.user is None:
+            return Response({
+                'status': 'failed',
+                'code': status.HTTP_404_NOT_FOUND,
+                'message': 'User does not exist'
+            },status=status.HTTP_404_NOT_FOUND)
+
         serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
