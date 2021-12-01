@@ -87,8 +87,8 @@ class RequestResetPasswordAPIView(generics.CreateAPIView):
             user = get_user_model().objects.get(email=serializer.data.get('email'))
             token = Token.objects.get_or_create(user=user)[0].key
             current_site = get_current_site(request=request).domain
-            relativeLink = reverse('user:password-reset-confirm')
-            absurl = 'http://'+current_site+relativeLink
+            relativeLink = reverse('user:password-reset')
+            absurl = 'http://'+current_site+relativeLink+'/'+token+'/'
             email_body = f'Hello!\nUse the token below to reset your password by following the link below to reset your password\nTOKEN: {token}\nLINK:{absurl}'
             data = {"email_subject":"Password Reset", "email_body":email_body, "to_email":user.email}
 
