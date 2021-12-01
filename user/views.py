@@ -83,11 +83,10 @@ class RequestResetPasswordAPIView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
 
+        # If data is valid, then sedn confirmation email with url to reset password
         if serializer.is_valid():
             user = get_user_model().objects.get(email=serializer.data.get('email'))
             token = Token.objects.get_or_create(user=user)[0].key
-            current_site = get_current_site(request=request).domain
-            relativeLink = reverse('user:password-reset', kwargs={'token':token})
             absurl = redirect('https://kiska-url.herokuapp.com/reset-password/'+token)
             email_body = f'Hello!\nUse the token below to reset your password by following the link below to reset your password\nTOKEN: {token}\nLINK:{absurl.url}'
             data = {"email_subject":"Password Reset", "email_body":email_body, "to_email":user.email}
@@ -162,6 +161,7 @@ class SingleUser(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self, **kwargs):
         print(self.kwargs.get('pk'))
         return get_user_model().objects.get(user_name=self.kwargs.get('pk'))
+
 
 class AuthTokenAPIView(ObtainAuthToken):
     """API view for obtaining authentication token"""
