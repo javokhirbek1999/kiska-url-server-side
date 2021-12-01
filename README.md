@@ -9,8 +9,28 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 ![Chat Preview](https://i.imgur.com/ibdQ7ra.png)
 
 ---
+## Request Flow for Shortening the URL
+![Chat Preview](https://i.imgur.com/5mUbTPr.jpeg)
+
+#### User must be authenticated in order to make `POST, UPDATE, PATCH and DELETE` requests
+1. User inserts URL to shorten and makes `POST` request to the server
+2. Server checks the inserted URL if it was shortened before (Checks the Database if it already exists)
+3. If inserted URL is shortened before (already exists in DB), the short url will returned to the user (client) from Database
+4. If it is not in Database, the inserted URL will be passed for Hashing (Encoding)
+5. Hashing uses MD5 Hashing Algorithm to hash the inserted URL and returns Hashed value
+  <br/> Hashed value will be used for making a short url to navige the user to the original url
+        <br/> `Same URLs should yield same Short URL for the SAME user`<br/>
+          `But same URLs should yield DIFFERENT Short URLs for DIFFERENT users`<br/><br/>
+          `Hashing Algorithm:` <br/>
+          <img src="https://i.imgur.com/qDRJ0Mb.png" width="600" heigh="600"/> <br/>
+        - `App the Hash value: 'hu7d34' to 'domain name' and saves it in Database` <br/>
+        - `Short URL:    'kiska.com/hu7d34'` <br/>
+        - `Map the Short URL to Original URL` <br/>
+        `Whenever user make a request to Short URL, Short URL redirects the user to Original URL`
+
+---
 ## Demo
-<p><a href="https://kiska.herokuapp.com/" target="_blank">Here</a> you can explore the API documented in Swagger</p>
+<p><a href="https://kiska.herokuapp.com/" target="_blank">Here</a> you can explore the live Swagger documented API</p>
 
 ---
 
