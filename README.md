@@ -35,42 +35,21 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 ---
 
 ## Features
-- Material Design
-- Emoji support
-- User @mentioning
-- Private messaging
-- Message deleting (for admins)
-- Ability to kick/ban users (for admins)
-- See other user's IPs (for admins)
-- Other awesome features yet to be implemented
-
-.
-![User Features](http://i.imgur.com/WbF1fi2.png)
-
-.
-![Admin Features](http://i.imgur.com/xQFaadt.png)
-
-
-#### There are 3 admin levels:
-- **Helper:** Can delete chat messages
-- **Moderator:** The above plus the ability to kick and ban users
-- **Administrator:** All the above plus send global alerts and promote/demote users
+- User Registration
+- Password Change
+- Password Reset through Email verification
 
 ---
 
 ## Setup
-Clone this repo to your desktop and run `pip install -r requirements.txt` to install all the dependencies.
-
-You might want to look into `config.json` to make change the port you want to use and set up a SSL certificate.
+To run the app in your own local machine, first of all, clone this repo to your local machine and on the terminal run `pip install -r requirements.txt` to install all the dependencies.
 
 ---
 
 ## Usage
-After you clone this repo to your desktop, go to its root directory and run `pip install -r requirements.txt` to install its dependencies.
+Once the dependencies are installed, you can run  `python manage.py runserver` to start the application. You will then be able to access it at `127.0.0.1:8000` or `localhost:8000`
 
-Once the dependencies are installed, you can run  `python manage.py runserver` to start the application. You will then be able to access it at localhost:8000
-
-To give yourself administrator permissions, you will have to create a superuser account (Admin User) by typing `python manage.py createusuperuser` in the console.
+To give yourself administrator permissions, you will have to create a superuser account (Admin User) by typing `python manage.py createusuperuser` in your terminal.
 
 ---
 
