@@ -112,7 +112,7 @@ class ConfirmResetPasswordAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
-            rel = reverse('user:password-reset')
+            rel = reverse('user:password-reset', kwargs={'token':serializer.data.get('token')})
             return redirect(rel)
 
         return Response({
@@ -132,7 +132,7 @@ class ResetPasswordAPIView(generics.UpdateAPIView):
     def get_object(self, **kwargs): 
         user = None
         try:
-            user = get_user_model().objects.get(user_name=self.kwargs.get('username'))
+            user = Token.objects.get(key=self.kwargs.get('token')).user
         except get_user_model().DoesNotExist:
             pass
         return user
