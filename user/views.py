@@ -88,7 +88,7 @@ class RequestResetPasswordAPIView(generics.CreateAPIView):
             token = Token.objects.get_or_create(user=user)[0].key
             current_site = get_current_site(request=request).domain
             relativeLink = reverse('user:password-reset', kwargs={'token':token})
-            absurl = 'http://'+current_site+relativeLink+'/'+token
+            absurl = 'http://'+current_site+relativeLink
             email_body = f'Hello!\nUse the token below to reset your password by following the link below to reset your password\nTOKEN: {token}\nLINK:{absurl}'
             data = {"email_subject":"Password Reset", "email_body":email_body, "to_email":user.email}
 
@@ -99,27 +99,6 @@ class RequestResetPasswordAPIView(generics.CreateAPIView):
                 'message': "We have sent you password reset link to your email",
                 'code': status.HTTP_200_OK
             }, status=status.HTTP_200_OK)
-        
-
-class ConfirmResetPasswordAPIView(generics.CreateAPIView):
-    """Password reset confirmation API View"""
-
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = serializers.ConfirmResetPasswordSerializer
-
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-
-        if serializer.is_valid():
-            rel = reverse('user:password-reset', kwargs={'token':serializer.data.get('token')})
-            return redirect(rel)
-
-        return Response({
-            'status': 'failed',
-            'message': 'Invalid credentials',
-            'code': status.HTTP_400_BAD_REQUEST
-             }, status=status.HTTP_400_BAD_REQUEST)
         
 
 class ResetPasswordAPIView(generics.UpdateAPIView):

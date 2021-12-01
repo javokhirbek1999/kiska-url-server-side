@@ -58,22 +58,6 @@ class RequestResetPasswordSerializer(serializers.Serializer):
         return attrs
 
 
-class ConfirmResetPasswordSerializer(serializers.Serializer):
-    """Serializer for password reset confirmation"""
-
-    token = serializers.CharField(max_length=1000)
-
-    def validate(self, attrs):
-        token = attrs.get('token')
-
-        # import pdb
-        # pdb.set_trace()
-        if not Token.objects.get(key=token):
-            raise serializers.ValidationError(_('Token is invalid, please request new one'))
-
-        return attrs
-
-
 class ResetPasswordSerializer(serializers.Serializer):
     """Serializer for password reset"""
 
