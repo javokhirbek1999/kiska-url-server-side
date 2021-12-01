@@ -4,7 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 
 class OriginalURL(models.Model):
 
-    """Original URL Model"""
+    """URL Model"""
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     url = models.URLField(max_length=2048)

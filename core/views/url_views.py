@@ -9,8 +9,9 @@ from rest_framework.views import APIView
 from ..serializers import url_serializer
 from ..models.url import OriginalURL
 
+
 class OriginalUrlApiView(generics.ListCreateAPIView):
-    """API view for creating and listing original url"""
+    """API view for creating and listing urls"""
     
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = url_serializer.OriginalUrlSerializer

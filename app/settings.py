@@ -23,14 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure')
+
 SECRET_KEY = config('SECRET_KEY', default='django-insecture')
-# SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecture')
 
-DEBUG = True
+DEBUG = False
 
 
-# ALLOWED_HOSTS = ['localhost','127.0.0.1', '192.168.43.21']
+
 ALLOWED_HOSTS = ['kiska.herokuapp.com', 'kiska-url.herokuapp.com','.herokuapp.com','127.0.0.1:8000','127.0.0.1','localhost','192.168.43.21','192.168.1.107',]
 
 
@@ -113,8 +112,7 @@ CORS_ALLOWED_ORIGINS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.IsAdminUser',
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAdminUser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -198,9 +196,7 @@ EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_HOST_USER=config('EMAIL_HOST_USER')
-# EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
-# EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
 
 
