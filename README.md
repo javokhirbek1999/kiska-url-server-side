@@ -8,6 +8,34 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 
 ![Chat Preview](https://i.imgur.com/ibdQ7ra.png)
 
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#kiskaurl-server-side">About The Project</a>
+      <ul>
+        <li><a href="#technologies">Built With</a></li>
+        <li><a href="#request-flow-for-shortening-the-url">How URLs are hashed</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+    </li>
+    <li>
+      <a href="#technologies">Technologies</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#setup">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
+
+
 ---
 ## Request Flow for Shortening the URL
 ![Chat Preview](https://i.imgur.com/5mUbTPr.jpeg)
