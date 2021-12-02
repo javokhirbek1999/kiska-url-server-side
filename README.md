@@ -12,21 +12,26 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 ## Request Flow for Shortening the URL
 ![Chat Preview](https://i.imgur.com/5mUbTPr.jpeg)
 
+
 #### User must be authenticated in order to make `POST, UPDATE, PATCH and DELETE` requests
 1. User inserts URL to shorten and makes `POST` request to the server
 2. Server checks the inserted URL if it was shortened before (Checks the Database if it already exists)
 3. If inserted URL is shortened before (already exists in DB), the short url will returned to the user (client) from Database
 4. If it is not in Database, the inserted URL will be passed for Hashing (Encoding)
 5. Hashing uses MD5 Hashing Algorithm to hash the inserted URL and returns Hashed value
-  <br/> Hashed value will be used for making a short url to navige the user to the original url
-        <br/> `Same URLs should yield same Short URL for the SAME user`<br/>
-          `But same URLs should yield DIFFERENT Short URLs for DIFFERENT users`<br/><br/>
-          `Hashing Algorithm:` <br/>
-          <img src="https://i.imgur.com/qDRJ0Mb.png" width="600" heigh="600"/> <br/>
-        - `App the Hash value: 'hu7d34' to 'domain name' and saves it in Database` <br/>
-        - `Short URL:    'kiska.com/hu7d34'` <br/>
-        - `Map the Short URL to Original URL` <br/>
-        `Whenever user make a request to Short URL, Short URL redirects the user to Original URL`
+  <br/> Hashed value will be used for making a short url to navige the user to the original url:
+```
+Same URLs should yield same Short URL for the SAME user
+But same URLs should yield DIFFERENT Short URLs for DIFFERENT users
+```
+`Hashing Algorithm:` <br/>
+<img src="https://i.imgur.com/qDRJ0Mb.png" width="600" heigh="600"/> <br/>
+```
+- Appends Hash value: 'hu7d34' to 'domain name' and saves it in Database
+- Short URL:    'kiska.com/hu7d34'
+- Map the Short URL to Original URL
+Whenever user make a request to Short URL, Short URL redirects the user to Original URL
+```
 
 ---
 ## Demo
@@ -40,16 +45,31 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 - Password Reset through Email verification
 
 ---
-
-## Setup
-To run the app in your own local machine, first of all, clone this repo to your local machine and on the terminal run `pip install -r requirements.txt` to install all the dependencies.
+## Technologies
+- Python 3.9
+- Django 3.2.9
+- Django REST Framework 3.12.4
 
 ---
 
-## Usage
-Once the dependencies are installed, you can run  `python manage.py runserver` to start the application. You will then be able to access it at `127.0.0.1:8000` or `localhost:8000`
+## Setup
+To run the app in your own local machine, first of all, clone this repo to your local machine and install all of the dependecies by going to its root directory and on the terminal run the command below:
+```bash
+$ pip install -r requirements.txt
+```
+---
 
-To give yourself administrator permissions, you will have to create a superuser account (Admin User) by typing `python manage.py createusuperuser` in your terminal.
+## Usage
+Once the dependencies are installed, you can start the application by running the command below : 
+```bash 
+$ python manage.py runserver
+``` 
+You will then be able to access it at `127.0.0.1:8000` or `localhost:8000`
+
+To give yourself administrator permissions, you will have to create a superuser account (Admin User) using the command below:
+```bash
+$ python manage.py createusuperuser
+```
 
 ---
 
