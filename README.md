@@ -49,6 +49,7 @@ Built in <a href="https://en.wikipedia.org/wiki/Representational_state_transfer"
 5. Hashing uses MD5 Hashing Algorithm to hash the inserted URL and returns Hashed value
   <br/> Hashed value will be used for making a short url to navige the user to the original url:
 ```
+<<<<<<< HEAD
 Same URLs should yield same Short URL for the SAME user.
 But same URLs should yield DIFFERENT Short URLs for DIFFERENT users.
 For that case, we use 'Hashing'.
@@ -80,6 +81,16 @@ Explore the diagram below to see how URLs are Hashed
 ```
 - Appends Hash value: 'h7d34' to 'domain name' and saves it in Database
 - Short URL:    'kiska.com/h7d34'
+=======
+Same URLs should yield same Short URL for the SAME user
+But same URLs should yield DIFFERENT Short URLs for DIFFERENT users
+```
+`Hashing Algorithm:` <br/>
+<img src="https://i.imgur.com/qDRJ0Mb.png" width="600" heigh="600"/> <br/>
+```
+- Appends Hash value: 'hu7d34' to 'domain name' and saves it in Database
+- Short URL:    'kiska.com/hu7d34'
+>>>>>>> f1e5c618db6a374eae257a38ba9d6728a71f10e4
 - Map the Short URL to Original URL
 Whenever user make a request to Short URL, Short URL redirects the user to Original URL
 ```
