@@ -36,10 +36,11 @@ class UserPasswordChange(generics.UpdateAPIView):
 
     # If user does not exist, returns None
     def get_object(self, **kwargs): 
+        User = get_user_model()
         user = None
         try:
-            user = get_user_model().objects.get(user_name=self.kwargs.get('username'))
-        except get_user_model().DoesNotExist:
+            user = User.objects.get(user_name=self.kwargs.get('username'))
+        except User.DoesNotExist:
             pass
         return user
 
